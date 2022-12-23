@@ -1,15 +1,17 @@
-import wx
-import wx.grid
-import re
-import matplotlib.pyplot as plt
-import time
-import csv
-import _InfoFrame
-import _Craw
-import _Database
-import _DBGrid
-import _FrozenDir
 import _lang
+import _FrozenDir
+import _DBGrid
+import _Database
+import _Craw
+import _InfoFrame
+import csv
+import time
+import re
+import wx.grid
+import wx
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
 
 
 class MainFrame(wx.Frame):
