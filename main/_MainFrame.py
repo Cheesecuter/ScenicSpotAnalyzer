@@ -2,7 +2,7 @@ import _lang
 import _FrozenDir
 import _DBGrid
 import _Database
-import _Craw
+import _Crawl
 import _InfoFrame
 import csv
 import time
@@ -86,9 +86,9 @@ class MainFrame(wx.Frame):
 
     def _initDatas_f(self, event):
         print(self._lang_._mframe_emsg__initDatas_f_is_running)
-        craw = _Craw.Craw(self._DB)
-        craw._save()
-        print(self._lang_._mframe_emsg_Craw_data_initiated)
+        crawl = _Crawl.Crawl(self._DB)
+        crawl._save()
+        print(self._lang_._mframe_emsg_Crawl_data_initiated)
         print(self._lang_._mframe_emsg__initDatas_f_is_done)
         pass
 

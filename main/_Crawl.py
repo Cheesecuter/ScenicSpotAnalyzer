@@ -9,7 +9,7 @@ import _FrozenDir
 import _Database
 
 
-class Craw:
+class Crawl:
     def __init__(self, db):
         self._db = db
         self._db = _Database.Database()
@@ -19,7 +19,7 @@ class Craw:
         }
         pass
 
-    def _craw(self, url):
+    def _crawl(self, url):
         req = requests.get(url, headers=self.headers)
         content = req.text
         soup = BeautifulSoup(content, 'lxml')
@@ -27,7 +27,7 @@ class Craw:
 
     def _save(self):
         csvPath = self.srcPath+r'\\Cities.csv'
-        Cname_list, Curl_list = self._crawCities()
+        Cname_list, Curl_list = self._crawlCities()
         cities = pd.DataFrame({'Cname': Cname_list, 'Curl': Curl_list})
         cities.to_csv(csvPath, encoding='UTF_8_SIG', index=False)
         self._db._CitiesRowIT = 0
@@ -49,7 +49,7 @@ class Craw:
         self.lock.acquire(True)
         self._db._InitCitiesData(Cname_list[i], Curl_list[i])
         self._db._AttractionsRowIT = 0
-        Cname_list2, Aname_list, AnameEn_list, Percentage_list = self._crawAttractions(
+        Cname_list2, Aname_list, AnameEn_list, Percentage_list = self._crawlAttractions(
             Cname_list[i], Curl_list[i])
         self._db._Cname2 = []
         self._db._Aname = []
@@ -62,9 +62,9 @@ class Craw:
         self.lock.release()
         pass
 
-    def _crawCities(self):
+    def _crawlCities(self):
         url = 'http://travel.qunar.com/place/'
-        soup = self._craw(url)
+        soup = self._crawl(url)
         self._Cname = []
         self._Curl = []
         sub_list = soup.find_all('div', attrs={'class': 'sub_list'})
@@ -76,7 +76,7 @@ class Craw:
                 self._Curl.append(attr[j].attrs['href'])
         return self._Cname, self._Curl
 
-    def _crawAttractions(self, Cname, Curl):
+    def _crawlAttractions(self, Cname, Curl):
         url = Curl+'-jingdian'
         _Cname = []
         _Aname = []
